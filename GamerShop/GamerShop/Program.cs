@@ -69,6 +69,7 @@ builder.Services.AddScoped<IPaginatorService, PaginatorService>();
 builder.Services.AddScoped<IFootballLeagueServices, FootballLeagueServices>();
 builder.Services.AddScoped<IRockBandServices, RockBandServices>();
 builder.Services.AddScoped<IPdfGeneratorService, PdfGeneratorService>();
+builder.Services.AddScoped<IBGServiceGeneratorPDF, BGServiceGeneratorPDF>();
 
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddSignalR();
@@ -77,7 +78,7 @@ var dbContextResolver = new Startup();
 dbContextResolver.RegisterDbContext(builder.Services);
 
 var app = builder.Build();
-
+builder.Configuration.AddJsonFile("HostsConfig.json");
 new Seed().Fill(app.Services);
 
 // Configure the HTTP request pipeline.
